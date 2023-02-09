@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { json } from 'body-parser';
+import { NasaService } from './nasa.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'nasa';
+  img!: string;
+  constructor(public imgOfTheDaya: NasaService) {
+
+  }
+
+
+    
+  ngOnInit(): void {
+    this.imgOfTheDaya.getImageOfTheDay().subscribe( data => {
+      this.img = data.hdurl;
+      console.log(data.hdurl);
+    })
+    
+  }
+
+
+
+
 }
